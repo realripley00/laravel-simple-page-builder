@@ -1,6 +1,6 @@
 <?php
 
-namespace RealRipley\LaravelSimplePageBuilder\Models;
+namespace RealRipley\Buildable\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 

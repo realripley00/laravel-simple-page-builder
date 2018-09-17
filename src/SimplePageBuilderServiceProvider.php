@@ -1,6 +1,6 @@
 <?php
 
-namespace RealRipley\LaravelSimplePageBuilder;
+namespace RealRipley\Buildable;
 
 use Illuminate\Support\ServiceProvider;
 
