@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RealRipley\\Builable\\": "src/"
+            "RealRipley\\Buildable\\": "src/"
         }
     },
     "extra": {
