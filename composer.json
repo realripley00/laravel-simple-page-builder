@@ -1,0 +1,34 @@
+{
+    "name": "realripley00/laravel-simple-page-builder",
+    "description": "Simple static page content management for Larvel projects.",
+    "license": "MIT",
+    "homepage": "https://greenstonemedia",
+    "keywords": ["laravel", "CMS", "eloquent", "laravel5"],
+    "authors": [{
+        "name": "Michael burgin",
+        "email": "realripley00@gmail.com"
+    }],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/database": ">= 5.0",
+        "illuminate/support": ">= 5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9",
+        "vlucas/phpdotenv": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RealRipley\\Builable\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RealRipley\\Buildable\\SimplePageBuilderServiceProvider"
+            ]
+        }
+    }
+}
