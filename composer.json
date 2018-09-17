@@ -21,14 +21,17 @@
     },
     "autoload": {
         "psr-4": {
-            "RealRipley\\LaravelSimplePageBuilder\\": "src/"
+            "RealRipley\\Buildable\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "RealRipley\\LaravelSimplePageBuilder\\SimplePageBuilderServiceProvider"
-            ]
+                "RealRipley\\Buildable\\SimplePageBuilderServiceProvider"
+            ],
+            "aliases": {
+                "Buildable": "RealRipley\\Buildable\\Buildable"
+            }
         }
     }
 }
