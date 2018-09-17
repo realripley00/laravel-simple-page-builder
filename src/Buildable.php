@@ -1,6 +1,6 @@
 <?php
 
-namespace RealRipley\Buildable;
+namespace RealRipley\LaravelSimplePageBuilder;
 
 trait Buildable
 {
@@ -9,7 +9,7 @@ trait Buildable
 	 *
 	 * @return void
 	 */
-	public static function bootBuildable()
+	public static function bootLaravelSimplePageBuilder()
 	{
 		if(static::removeContentOnDelete()) {
 			static::deleting(function($model) {
@@ -20,6 +20,6 @@ trait Buildable
     
     public function addContent()
     {
-        
+
     }
 }
