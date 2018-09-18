@@ -24,9 +24,39 @@ trait Buildable
 	public function getContents()
 	{
 		return $this->morphMany(BuildingBlock::class, 'buildable')->orderBy('order')->get();
+    }
+    
+    public function addHeading($heading, $order = null)
+    {
+		$block = new BuildingBlock();
+		$block->type = 'heading';
+		$block->content = $heading;
+		$block->buildable_type = get_class($this);
+		$block->buildable_id = $this->id;
+
+		if ($order != null) { 
+			$block->order = $order;
+		}
+
+		$block->save();
+    }
+    
+    public function addSubHeading($subheading, $order = null)
+    {
+		$block = new BuildingBlock();
+		$block->type = 'subheading';
+		$block->content = $subheading;
+		$block->buildable_type = get_class($this);
+		$block->buildable_id = $this->id;
+
+		if ($order != null) { 
+			$block->order = $order;
+		}
+
+		$block->save();
 	}
     
-    public function addContentParagraph($paragraph, $order = null)
+    public function addParagraph($paragraph, $order = null)
     {
 		$block = new BuildingBlock();
 		$block->type = 'paragraph';
@@ -41,7 +71,7 @@ trait Buildable
 		$block->save();
 	}
 	
-	public function addContentImage($url, $order = null)
+	public function addImage($url, $order = null)
     {
 		$block = new BuildingBlock();
 		$block->type = 'image';
