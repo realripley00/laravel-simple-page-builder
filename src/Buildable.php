@@ -38,7 +38,7 @@ trait Buildable
 			$block->order = $order;
 		}
 
-		$block->save();
+		return $block->save();
     }
     
     public function addSubHeading($subheading, $order = null)
@@ -53,7 +53,7 @@ trait Buildable
 			$block->order = $order;
 		}
 
-		$block->save();
+		return $block->save();
 	}
     
     public function addParagraph($paragraph, $order = null)
@@ -68,7 +68,7 @@ trait Buildable
 			$block->order = $order;
 		}
 
-		$block->save();
+		return $block->save();
 	}
 	
 	public function addImage($url, $order = null)
@@ -83,6 +83,6 @@ trait Buildable
 			$block->order = $order;
 		}
 
-		$block->save();
+		return $block->save();
 	}
 }
