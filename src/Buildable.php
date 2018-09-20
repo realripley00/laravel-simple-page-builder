@@ -177,5 +177,19 @@ trait Buildable
 		}
 
 		return false;
+    }
+    
+    public function updateContent($block_id, $content)
+	{
+		$block = BuildingBlock::find($block_id);
+
+		if ($block) {
+			$block->content = $content;
+			$block->save();
+
+			return true;
+		}
+
+		return false;
 	}
 }
