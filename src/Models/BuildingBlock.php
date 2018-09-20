@@ -24,6 +24,6 @@ class BuildingBlock extends Eloquent
 
     public function items()
     {
-        return $this->hasMany('\RealRipley\Buildable\Models\ListItem');
+        return $this->hasMany('\RealRipley\Buildable\Models\ListItem', 'buildingblock_id', 'id');
     }
 }
