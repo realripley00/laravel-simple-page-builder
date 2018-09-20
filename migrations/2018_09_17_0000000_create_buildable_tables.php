@@ -17,7 +17,7 @@ class CreateBuildableTables extends Migration
         });
 
         Schema::create('listitems', function ($table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->string('text');
             $table->integer('buildingblock_id')->unsigned();
             $table->foreign('buildingblock_id')->references('id')->on('buildingblocks');

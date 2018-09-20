@@ -8,7 +8,7 @@ use RealRipley\Buildable\Models\ListItem;
 trait Buildable
 {
     /**
-	 * Boot the soft taggable trait for a model.
+	 * Boot the buildable trait.
 	 *
 	 * @return void
 	 */
@@ -23,7 +23,14 @@ trait Buildable
 	
 	public function getContents()
 	{
-		return $this->morphMany(BuildingBlock::class, 'buildable')->orderBy('order')->get();
+		return $this->morphMany(
+			BuildingBlock::class, 'buildable'
+		)->orderBy('order')->get()->map(function($block) {
+			if ($block->type == 'orderedlist' || $block->type == 'numberedlist') {
+				$block->listItems = $block->items;
+			}
+			return $block;
+		});
     }
     
     public function addHeading($heading, $order = null)
@@ -84,5 +91,91 @@ trait Buildable
 		}
 
 		return $block->save();
+	}
+
+	public function addOrderedList($firstListItem, $order = null)
+    {
+		$block = new BuildingBlock();
+		$block->type = 'orderedlist';
+		$block->content = $firstListItem;
+		$block->buildable_type = get_class($this);
+		$block->buildable_id = $this->id;
+
+		if ($order != null) { 
+			$block->order = $order;
+		}
+
+		$list = $block->save();
+		
+		$listItem = new ListItem();
+		$listItem->text = $firstListItem;
+		$listItem->buildingblock_id = $block->id;
+
+		$listItem->save();
+
+		return $listItem;
+		
+	}
+
+	public function addNumberedList($firstListItem, $order = null)
+    {
+		$block = new BuildingBlock();
+		$block->type = 'numberedlist';
+		$block->content = $firstListItem;
+		$block->buildable_type = get_class($this);
+		$block->buildable_id = $this->id;
+
+		if ($order != null) { 
+			$block->order = $order;
+		}
+
+		$list = $block->save();
+		
+		$listItem = new ListItem();
+		$listItem->text = $firstListItem;
+		$listItem->buildingblock_id = $block->id;
+
+		$listItem->save();
+
+		return $listItem;
+		
+	}
+
+	public function getList($list_id)
+	{
+		$block = ListItem::find($list_id)->block;
+
+		return $block;
+	}
+
+	public function addListItem($list_id, $text)
+	{
+		$listItem = new ListItem();
+		$listItem->text = $text;
+		$listItem->buildingblock_id = $list_id;
+
+		$listItem->save();
+
+		return $listItem;
+    }
+    
+    public function removeContent($block_id)
+	{
+		$block = BuildingBlock::find($block_id);
+
+		if ($block) {
+
+			if ($block->type == 'orderedlist' || $block->type == 'numberedlist') {
+				foreach($block->items as $item) {
+					ListItem::destroy($item->id);
+				}
+			}
+
+			BuildingBlock::destroy($block->id);
+
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class ListItem extends Eloquent
 {
     protected $table = 'listitems';
-    protected $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'text',
         'buildingblock_id'
     ];
 
-    public function blocks()
+    public function block()
     {
-        return $this->belongsTo('\RealRipley\Models\BuildingBlock');
+        return $this->belongsTo('\RealRipley\Buildable\Models\BuildingBlock', 'buildingblock_id', 'id');
     }
 }
