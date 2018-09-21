@@ -139,6 +139,30 @@ trait Buildable
 
 		return $listItem;
 		
+    }
+    
+    public function addAlphaList($firstListItem, $order = null)
+    {
+		$block = new BuildingBlock();
+		$block->type = 'alphalist';
+		$block->content = $firstListItem;
+		$block->buildable_type = get_class($this);
+		$block->buildable_id = $this->id;
+
+		if ($order != null) { 
+			$block->order = $order;
+		}
+
+		$list = $block->save();
+		
+		$listItem = new ListItem();
+		$listItem->text = $firstListItem;
+		$listItem->buildingblock_id = $block->id;
+
+		$listItem->save();
+
+		return $listItem;
+		
 	}
 
 	public function getList($list_id)
