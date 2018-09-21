@@ -26,7 +26,7 @@ trait Buildable
 		return $this->morphMany(
 			BuildingBlock::class, 'buildable'
 		)->orderBy('order')->get()->map(function($block) {
-			if ($block->type == 'orderedlist' || $block->type == 'numberedlist' || $block == 'alphalist') {
+			if ($block->type == 'orderedlist' || $block->type == 'numberedlist' || $block->type == 'alphalist') {
 				$block->listItems = $block->items;
 			}
 			return $block;
