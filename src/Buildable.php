@@ -189,7 +189,7 @@ trait Buildable
 
 		if ($block) {
 
-			if ($block->type == 'orderedlist' || $block->type == 'numberedlist') {
+			if ($block->type == 'unorderedlist' || $block->type == 'numberedlist') {
 				foreach($block->items as $item) {
 					ListItem::destroy($item->id);
 				}
