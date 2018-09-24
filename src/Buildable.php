@@ -93,7 +93,7 @@ trait Buildable
 		return $block->save();
 	}
 
-	public function addOrderedList($firstListItem, $order = null)
+	public function addUnorderedList($firstListItem, $order = null)
     {
 		$block = new BuildingBlock();
 		$block->type = 'orderedlist';
