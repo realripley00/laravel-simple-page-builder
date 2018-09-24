@@ -26,7 +26,7 @@ trait Buildable
 		return $this->morphMany(
 			BuildingBlock::class, 'buildable'
 		)->orderBy('order')->get()->map(function($block) {
-			if ($block->type == 'orderedlist' || $block->type == 'numberedlist' || $block->type == 'alphalist') {
+			if ($block->type == 'unorderedlist' || $block->type == 'numberedlist' || $block->type == 'alphalist') {
 				$block->listItems = $block->items;
 			}
 			return $block;
@@ -96,7 +96,7 @@ trait Buildable
 	public function addUnorderedList($firstListItem, $order = null)
     {
 		$block = new BuildingBlock();
-		$block->type = 'orderedlist';
+		$block->type = 'unorderedlist';
 		$block->content = $firstListItem;
 		$block->buildable_type = get_class($this);
 		$block->buildable_id = $this->id;
