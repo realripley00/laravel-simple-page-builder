@@ -230,5 +230,17 @@ trait Buildable
 		$block->order = $order;
 
 		return $block->save();
-    }
+	}
+	
+	public function removeItem($item_id)
+	{
+		$remove = ListItem::destroy($item_id);
+	}
+
+	public function updateItem($item_id, $content)
+	{
+		$list = ListItem::find($item_id);
+		$list->text = $content;
+		return $list->save();
+	}
 }
