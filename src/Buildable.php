@@ -216,4 +216,19 @@ trait Buildable
 
 		return false;
 	}
+
+	public function getBlock($block_id)
+	{
+		$block = BuildingBlock::find($block_id);
+
+		return $block;
+	}
+
+	public function updateOrder($block_id, $order)
+    {
+		$block = BuildingBlock::find($block_id);
+		$block->order = $order;
+
+		return $block->save();
+    }
 }
